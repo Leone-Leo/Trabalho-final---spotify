@@ -1,131 +1,130 @@
-<style>
-        :root {
-            --spotify-green: #1DB954;
-            --spotify-black: #191414;
-            --spotify-white: #FFFFFF;
-            --spotify-gray: #535353;
-        }
-
-        .reveal {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 24px; /* Fonte base ajustada para notebook */
-        }
-
-        .reveal h1, .reveal h2, .reveal h3 {
-            color: var(--spotify-green);
-            text-transform: none;
-        }
-
-        .reveal h1 { font-size: 2.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Spotify - Leozinho</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css" id="theme">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --spotify-green: #1DB954; }
+        .reveal { font-family: sans-serif; }
+        .reveal h1, .reveal h2, .reveal h3 { color: var(--spotify-green); text-transform: none; }
+        
+        /* Ajuste Widescreen (Notebook) */
+        .reveal h1 { font-size: 2.2em; }
         .reveal h2 { font-size: 1.5em; }
-
-        /* --- CORREÇÃO DAS IMAGENS (SIMPLIFICADO) --- */
-        /* Força a imagem a nunca passar de 450px de altura (o slide tem 720px) */
+        
+        /* IMAGENS: Carregam direto do GitHub (Internet) */
         .reveal section img {
-            max-height: 400px !important; 
-            max-width: 90% !important;
-            height: auto !important;
-            width: auto;
+            max-height: 55vh; /* Não deixa a imagem estourar a altura */
+            max-width: 90%;
             display: block;
             margin: 10px auto;
             border: none;
-            box-shadow: none;
-            object-fit: contain; /* Garante que a imagem apareça inteira */
+            background: transparent;
         }
 
-        /* Imagens da galeria (grid) precisam ser menores */
-        .reveal .screenshot-grid img {
-            max-height: 120px !important;
-            border: 1px solid var(--spotify-green) !important;
+        /* Estilos dos Badges e Cards */
+        .spotify-badge {
+            background: var(--spotify-green); color: white; 
+            padding: 5px 15px; border-radius: 20px; font-size: 0.7em; margin: 5px; display: inline-block;
         }
-        /* ------------------------------------------- */
-
-        .reveal .center-content { text-align: center; }
-
-        .reveal .spotify-badge {
-            background: linear-gradient(135deg, var(--spotify-green), #1ed760);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            display: inline-block;
-            margin: 5px;
-            font-weight: bold;
-            font-size: 0.8em;
+        
+        .metric-card {
+            border-left: 3px solid var(--spotify-green);
+            background: rgba(255,255,255,0.05);
+            padding: 10px; margin: 10px;
         }
-
-        .reveal .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .reveal .tech-item {
-            background: rgba(29, 185, 84, 0.1);
-            border: 2px solid var(--spotify-green);
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .reveal .tech-item i { font-size: 1.8em; color: var(--spotify-green); margin-bottom: 5px; }
-
-        .reveal .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .reveal .metric-card {
-            background: linear-gradient(135deg, rgba(29, 185, 84, 0.2), rgba(29, 185, 84, 0.05));
-            border-left: 4px solid var(--spotify-green);
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .reveal .metric-value { font-size: 1.8em; font-weight: bold; color: var(--spotify-green); }
-        .reveal .metric-label { font-size: 0.7em; color: #999; }
-
-        .reveal .feature-list { list-style: none; padding: 0; font-size: 0.8em; }
-        .reveal .feature-list li { padding: 5px 0 5px 30px; position: relative; }
-        .reveal .feature-list li::before {
-            content: "✓"; position: absolute; left: 0; 
-            color: var(--spotify-green); font-weight: bold; font-size: 1.2em;
-        }
-
-        .reveal .highlight-box {
-            background: rgba(29, 185, 84, 0.15);
-            border: 2px solid var(--spotify-green);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-            font-size: 0.8em;
-        }
-
-        .reveal .code-block {
-            background: #1e1e1e;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.6em;
-            text-align: left;
-        }
-
-        .reveal .comparison-table {
-            width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.65em;
-        }
-        .reveal .comparison-table th { background: var(--spotify-green); color: white; padding: 8px; }
-        .reveal .comparison-table td { padding: 8px; border-bottom: 1px solid #333; }
-
-        .reveal .screenshot-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px;
-        }
-        .reveal .screenshot-item img { width: 100%; border-radius: 5px; }
-        .reveal .screenshot-caption { font-size: 0.5em; color: #999; text-align: center; }
-
-        .reveal .footer {
-            position: fixed; bottom: 5px; left: 10px; font-size: 0.5em; color: #666; z-index: 10;
-        }
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; }
+        .metric-value { font-size: 1.5em; color: var(--spotify-green); font-weight: bold; }
+        
+        .footer { position: fixed; bottom: 10px; left: 10px; font-size: 0.5em; color: #888; z-index: 100; }
     </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <section style="text-align: center;">
+                <h1><i class="fas fa-music"></i> Análise Spotify</h1>
+                <h3>Modelagem Preditiva de Popularidade</h3>
+                <p>Mestrando: Geyson de Araujo</p>
+                <div>
+                    <span class="spotify-badge">Python</span>
+                    <span class="spotify-badge">Machine Learning</span>
+                </div>
+            </section>
+
+            <section>
+                <h2>Metodologia CRISP-DM</h2>
+                <img src="https://raw.githubusercontent.com/Leone-Leo/Trabalho-final---spotify/main/assets/screenshots/branding/crisp_dm_diagram.png" alt="CRISP-DM">
+            </section>
+
+            <section>
+                <h2>Arquitetura</h2>
+                <img src="https://raw.githubusercontent.com/Leone-Leo/Trabalho-final---spotify/main/assets/screenshots/architecture.png" alt="Arquitetura">
+            </section>
+
+            <section>
+                <h2>Distribuição da Popularidade</h2>
+                <img src="https://raw.githubusercontent.com/Leone-Leo/Trabalho-final---spotify/main/assets/screenshots/analysis/popularity_histogram.png" alt="Histograma">
+            </section>
+
+            <section>
+                <h2>Matriz de Correlação</h2>
+                <img src="https://raw.githubusercontent.com/Leone-Leo/Trabalho-final---spotify/main/assets/screenshots/analysis/correlation_heatmap.png" alt="Heatmap">
+            </section>
+
+            <section>
+                <h2>O que define o sucesso?</h2>
+                <img src="https://raw.githubusercontent.com/Leone-Leo/Trabalho-final---spotify/main/assets/screenshots/analysis/xgb_feature_importance.png" alt="Importance">
+                <div class="metrics-grid">
+                    <div class="metric-card"><div class="metric-value">1º</div> Loudness</div>
+                    <div class="metric-card"><div class="metric-value">2º</div> Energy</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Loudness vs Popularidade</h2>
+                <img src="https://raw.githubusercontent.com/Leone-Leo/Trabalho-final---spotify/main/assets/screenshots/analysis/loudness_popularity_scatter.png" alt="Scatter">
+            </section>
+            
+            <section>
+                <h2>Performance dos Modelos</h2>
+                <img src="https://raw.githubusercontent.com/Leone-Leo/Trabalho-final---spotify/main/assets/screenshots/analysis/model_comparison.png" alt="Modelos">
+            </section>
+
+            <section>
+                <h2>API REST</h2>
+                <img src="https://raw.githubusercontent.com/Leone-Leo/Trabalho-final---spotify/main/assets/screenshots/api_preview.png" alt="API">
+            </section>
+
+            <section>
+                <h2>Dashboard Streamlit</h2>
+                <img src="https://raw.githubusercontent.com/Leone-Leo/Trabalho-final---spotify/main/assets/screenshots/dashboard_preview.png" alt="Dashboard">
+            </section>
+
+            <section style="text-align: center;">
+                <h1>Obrigado!</h1>
+                <p>Repositório: github.com/leone-leo/Trabalho-final---spotify</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script>
+        // Configuração para Notebook Widescreen (16:9)
+        Reveal.initialize({
+            width: 1280, height: 720, margin: 0.05,
+            hash: true, center: true, transition: 'slide'
+        });
+    </script>
+    <div class="footer">Pressione F para tela cheia</div>
+</body>
+</html>
