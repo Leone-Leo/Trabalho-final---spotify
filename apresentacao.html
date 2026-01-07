@@ -678,4 +678,534 @@
             <section>
                 <h2><i class="fas fa-volume-up"></i> Loudness vs Popularidade</h2>
                 <img src="./assets/screenshots/analysis/loudness_popularity_scatter.png" alt="Loudness Scatter" class="architecture-diagram">
-                <div class="metrics-grid" style="margin-top:
+                <div class="metrics-grid" style="margin-top: 20px;">
+                    <div class="metric-card">
+                        <div class="metric-value">+0.492</div>
+                        <div class="metric-label">Correlação Positiva Moderada</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">~28.5%</div>
+                        <div class="metric-label">Feature Mais Importante!</div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <p style="text-align: center; font-size: 0.9em;">
+                        <i class="fas fa-star" style="color: #FFD700;"></i>
+                        <strong>Loudness é a característica mais influente na popularidade!</strong>
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-images"></i> Galeria de Análises Visuais</h2>
+                <div class="screenshot-grid" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                    <div class="screenshot-item">
+                        <img src="./assets/screenshots/analysis/correlation_heatmap.png" alt="Correlações">
+                        <div class="screenshot-caption">Matriz de Correlação</div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/screenshots/analysis/popularity_histogram.png" alt="Distribuição">
+                        <div class="screenshot-caption">Distribuição Popularidade</div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/screenshots/analysis/feature_correlations.png" alt="Features">
+                        <div class="screenshot-caption">Correlações Features</div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/screenshots/analysis/loudness_popularity_scatter.png" alt="Loudness">
+                        <div class="screenshot-caption">Loudness vs Popularidade</div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/screenshots/analysis/xgb_feature_importance.png" alt="Importância">
+                        <div class="screenshot-caption">Feature Importance</div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/screenshots/analysis/model_comparison.png" alt="Modelos">
+                        <div class="screenshot-caption">Comparação Modelos</div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <p style="text-align: center; font-size: 0.85em;">
+                        <strong>Todas as análises visuais foram geradas!</strong> Use as setas para ver cada gráfico em detalhes.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-robot"></i> Resultados: Comparação de Algoritmos de ML</h2>
+                <table class="comparison-table" style="font-size: 0.75em;">
+                    <thead>
+                        <tr>
+                            <th>Algoritmo</th>
+                            <th>R² (Coef. Determinação)</th>
+                            <th>MAE</th>
+                            <th>RMSE</th>
+                            <th>Tempo de Treinamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: rgba(29, 185, 84, 0.2);">
+                            <td><strong>🏆 XGBoost (Gradient Boosting Otimizado)</strong></td>
+                            <td><strong>0.254</strong></td>
+                            <td><strong>12.48</strong></td>
+                            <td><strong>16.92</strong></td>
+                            <td>~15s</td>
+                        </tr>
+                        <tr>
+                            <td>Gradient Boosting (sklearn)</td>
+                            <td>0.241</td>
+                            <td>12.73</td>
+                            <td>17.15</td>
+                            <td>~45s</td>
+                        </tr>
+                        <tr>
+                            <td>Random Forest</td>
+                            <td>0.228</td>
+                            <td>13.02</td>
+                            <td>17.48</td>
+                            <td>~30s</td>
+                        </tr>
+                        <tr>
+                            <td>ElasticNet (Regressão Regularizada)</td>
+                            <td>0.185</td>
+                            <td>14.21</td>
+                            <td>18.92</td>
+                            <td>~2s</td>
+                        </tr>
+                        <tr>
+                            <td>Ridge Regression</td>
+                            <td>0.182</td>
+                            <td>14.35</td>
+                            <td>19.01</td>
+                            <td>~1s</td>
+                        </tr>
+                        <tr>
+                            <td>Lasso Regression</td>
+                            <td>0.179</td>
+                            <td>14.48</td>
+                            <td>19.12</td>
+                            <td>~1s</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 20px;">
+                    <span class="badge-success">Conclusão: Modelos ensemble baseados em árvores superam significativamente modelos lineares</span>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-chart-bar"></i> Interpretabilidade: Feature Importance (XGBoost)</h2>
+                <img src="./assets/screenshots/analysis/xgb_feature_importance.png" alt="Gráfico de Importância das Features" class="architecture-diagram">
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <ol style="font-size: 0.9em;">
+                        <li><strong>Loudness (28.5%)</strong> - Volume médio é o preditor dominante, confirmando sua forte correlação linear</li>
+                        <li><strong>Energy (19.8%)</strong> - Intensidade percebida é o segundo fator mais relevante</li>
+                        <li><strong>Danceability (15.6%)</strong> - Adequação para dança contribui significativamente</li>
+                        <li><strong>Valence (12.4%)</strong> - Positividade musical apresenta importância moderada</li>
+                        <li><strong>Acousticness (8.9%)</strong> - Músicas menos acústicas (eletrônicas) tendem a ser mais populares</li>
+                    </ol>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+                    <span class="badge-warning">As 3 principais features explicam ~64% da importância total do modelo</span>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-balance-scale"></i> Comparação Visual de Modelos</h2>
+                <img src="./assets/screenshots/analysis/model_comparison.png" alt="Comparação Modelos" class="architecture-diagram">
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <p style="font-size: 0.9em; text-align: center;">
+                        <strong>XGBoost apresenta os melhores resultados:</strong><br>
+                        Menor erro (MAE = 12.48) e maior variância explicada (R² = 0.254)
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-trophy"></i> Principais Resultados</h2>
+                <img src="./assets/screenshots/results_summary.png" alt="Resultados" class="architecture-diagram" style="max-width: 80%;">
+                <div class="metrics-grid" style="margin-top: 20px;">
+                    <div class="metric-card">
+                        <div class="metric-value">25%</div>
+                        <div class="metric-label">Variância Explicada (R²)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">±12.5</div>
+                        <div class="metric-label">Erro Médio (MAE)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-lightbulb"></i> Discussão: Principais Achados da Pesquisa</h2>
+                <ul class="feature-list" style="font-size: 0.9em;">
+                    <li><strong>Poder Preditivo Moderado:</strong> Características acústicas explicam aproximadamente 25% da variância da popularidade (R²=0.254), indicando que fatores externos são predominantes</li>
+                    <li><strong>Dominância de Atributos de Intensidade:</strong> Loudness e Energy são os preditores mais relevantes, sugerindo preferência por músicas energéticas e com maior volume</li>
+                    <li><strong>Não-Linearidade das Relações:</strong> Superioridade de modelos ensemble baseados em árvores sobre modelos lineares indica interações complexas entre features</li>
+                    <li><strong>Fatores Não-Capturados:</strong> Aproximadamente 75% da variância não explicada sugere forte influência de marketing, reputação do artista, contexto temporal e viralização social</li>
+                    <li><strong>Segmentação Natural:</strong> Análise de clustering revelou 4 perfis distintos de músicas, indicando heterogeneidade no dataset</li>
+                </ul>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p style="text-align: center;">
+                        <i class="fas fa-exclamation-triangle" style="color: #FF9800;"></i>
+                        <strong>Limitação Metodológica:</strong> Características acústicas isoladas são insuficientes para predição completa; modelos multifatoriais são necessários
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-server"></i> FastAPI REST API</h2>
+                <img src="./assets/screenshots/api_preview.png" alt="API" class="architecture-diagram">
+                <div class="code-block">
+POST /predict<br>
+{<br>
+  "danceability": 0.735,<br>
+  "energy": 0.578,<br>
+  "loudness": -5.594,<br>
+  ...<br>
+}<br><br>
+→ {"predicted_popularity": 65.32, "category": "Medium"}
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-chart-line"></i> Streamlit Dashboard</h2>
+                <img src="./assets/screenshots/dashboard_preview.png" alt="Dashboard" class="architecture-diagram">
+                <ul class="feature-list" style="font-size: 0.85em; margin-top: 20px;">
+                    <li>Visualizações interativas com Plotly</li>
+                    <li>Comparação de modelos em tempo real</li>
+                    <li>Predição com ajuste de sliders</li>
+                    <li>Análise exploratória de dados</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2><i class="fab fa-python"></i> Uso como Biblioteca Python</h2>
+                <div class="code-block" style="font-size: 0.7em;">
+# Instalação<br>
+pip install -e .<br><br>
+# Uso<br>
+from spotify_analysis.models import ModelTrainer<br>
+from spotify_analysis.data import DataLoader, DataPreprocessor<br><br>
+# Carregar e preprocessar dados<br>
+loader = DataLoader()<br>
+df = loader.load_data()<br>
+preprocessor = DataPreprocessor()<br>
+X_processed = preprocessor.fit_transform(df)<br><br>
+# Treinar modelo<br>
+trainer = ModelTrainer('xgboost')<br>
+trainer.fit(X_train, y_train)<br>
+metrics = trainer.evaluate(X_test, y_test)<br><br>
+# Feature importance<br>
+importance_df = trainer.get_feature_importance()
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fab fa-docker"></i> Deploy com Docker</h2>
+                <div class="code-block">
+# Iniciar todos os serviços<br>
+docker-compose up -d<br><br>
+# Acessar:<br>
+# - API: http://localhost:8000/docs<br>
+# - Dashboard: http://localhost:8501
+                </div>
+                <div class="tech-stack" style="margin-top: 30px;">
+                    <div class="tech-item">
+                        <i class="fas fa-box"></i>
+                        <h4>Containerização</h4>
+                        <p style="font-size: 0.8em;">Isolamento e portabilidade</p>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-layer-group"></i>
+                        <h4>Multi-serviço</h4>
+                        <p style="font-size: 0.8em;">API + Dashboard</p>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-sync-alt"></i>
+                        <h4>Reprodutível</h4>
+                        <p style="font-size: 0.8em;">Mesmo ambiente everywhere</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-code-branch"></i> CI/CD com GitHub Actions</h2>
+                <ul class="feature-list" style="font-size: 0.85em;">
+                    <li><strong>Testes Automatizados:</strong> pytest com cobertura</li>
+                    <li><strong>Qualidade de Código:</strong> black, flake8, mypy, isort</li>
+                    <li><strong>Segurança:</strong> bandit, safety, CodeQL</li>
+                    <li><strong>Multi-Python:</strong> 3.8, 3.9, 3.10, 3.11, 3.12</li>
+                    <li><strong>Documentação:</strong> Build automático</li>
+                </ul>
+                <div style="text-align: center; margin-top: 30px;">
+                    <span class="badge-success"><i class="fas fa-check"></i> 100% Aprovado</span>
+                    <span class="badge-info"><i class="fas fa-shield-alt"></i> Seguro</span>
+                    <span class="badge-warning"><i class="fas fa-code"></i> Limpo</span>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-vial"></i> Testes e Qualidade</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">pytest</div>
+                        <div class="metric-label">Framework de Testes</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">80%+</div>
+                        <div class="metric-label">Cobertura de Código</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">Type Hints</div>
+                        <div class="metric-label">Validação mypy</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">PEP 8</div>
+                        <div class="metric-label">Estilo Python</div>
+                    </div>
+                </div>
+                <div class="code-block" style="margin-top: 30px;">
+# Executar testes<br>
+make test<br>
+make test-cov<br>
+make quality
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-folder-tree"></i> Estrutura do Projeto</h2>
+                <div class="code-block" style="font-size: 0.55em;">
+An-lise-Spotify/<br>
+├── src/spotify_analysis/      # Pacote principal<br>
+│   ├── data/                  # Carregamento e preprocessamento<br>
+│   ├── models/                # Modelos ML<br>
+│   ├── visualization/        # Gráficos e plots<br>
+│   ├── utils/                # Utilitários<br>
+│   └── config.py             # Configurações<br>
+├── tests/                     # Testes unitários<br>
+├── notebooks/                # Análise Jupyter<br>
+├── docs/                     # Documentação<br>
+├── api.py                    # FastAPI app<br>
+├── app.py                    # Streamlit dashboard<br>
+├── Dockerfile                # Container config<br>
+└── docker-compose.yml       # Multi-serviço
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-book"></i> Documentação Completa</h2>
+                <ul class="feature-list" style="font-size: 0.85em;">
+                    <li><strong>README.md:</strong> Guia completo com badges, arquitetura, exemplos</li>
+                    <li><strong>QUICKSTART.md:</strong> Instalação em 5 minutos</li>
+                    <li><strong>CONTRIBUTING.md:</strong> Guia para contribuidores</li>
+                    <li><strong>SECURITY.md:</strong> Política de segurança</li>
+                    <li><strong>API Docs:</strong> OpenAPI/Swagger interativo</li>
+                    <li><strong>Docstrings:</strong> Google-style em todo código</li>
+                    <li><strong>Relatório Técnico:</strong> Análise detalhada (PT-BR)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-award"></i> Competências Demonstradas</h2>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <i class="fas fa-chart-pie"></i>
+                        <h4>EDA</h4>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Visualização</h4>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-brain"></i>
+                        <h4>ML Supervisionado</h4>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-project-diagram"></i>
+                        <h4>Clustering</h4>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-magic"></i>
+                        <h4>Recomendação</h4>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-server"></i>
+                        <h4>APIs RESTful</h4>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-desktop"></i>
+                        <h4>Dashboards</h4>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-docker"></i>
+                        <h4>DevOps</h4>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-road"></i> Recomendações para Trabalhos Futuros</h2>
+                <ul class="feature-list" style="font-size: 0.85em;">
+                    <li><strong>Modelagem Temporal:</strong> Incorporação de séries temporais e análise de tendências longitudinais para capturar evolução da popularidade</li>
+                    <li><strong>Variáveis Contextuais:</strong> Inclusão de features relacionadas ao artista (follower count, histórico de lançamentos), métricas de engajamento social e dados de marketing</li>
+                    <li><strong>Processamento de Linguagem Natural:</strong> Análise de sentimento e extração de tópicos a partir das letras musicais</li>
+                    <li><strong>Deep Learning Multimodal:</strong> Exploração de redes neurais profundas, transfer learning e análise de áudio raw (spectrogramas, MFCCs)</li>
+                    <li><strong>Deployment em Nuvem:</strong> Implementação escalável em plataformas cloud (AWS/GCP/Azure) com auto-scaling e load balancing</li>
+                    <li><strong>MLOps Avançado:</strong> Integração com MLflow para tracking de experimentos, monitoramento de drift de dados e retreinamento automático</li>
+                    <li><strong>Validação Cross-Cultural:</strong> Análise comparativa entre diferentes mercados geográficos e culturas musicais</li>
+                    <li><strong>Causalidade:</strong> Aplicação de métodos de inferência causal (Propensity Score Matching, Instrumental Variables) para estabelecer relações causais</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-exclamation-triangle"></i> Limitações Metodológicas e do Estudo</h2>
+                <div class="highlight-box">
+                    <ul style="font-size: 0.9em;">
+                        <li><strong>Multifatorialidade Não-Capturada:</strong> Popularidade é influenciada por fatores contextuais externos não representados no dataset (esforços de marketing, viralização em redes sociais, momento de lançamento, eventos culturais)</li>
+                        <li><strong>Temporalidade e Viés de Seleção:</strong> Dataset representa snapshot temporal específico; popularidade é dinâmica e evolui temporalmente</li>
+                        <li><strong>Viés de Plataforma:</strong> Dados específicos do Spotify podem não generalizar para outras plataformas de streaming ou mercados geográficos distintos</li>
+                        <li><strong>Causalidade vs. Correlação:</strong> Análise observacional não estabelece relações causais; correlações identificadas podem ser espúrias ou mediadas por variáveis confundidoras</li>
+                        <li><strong>Variância Não-Explicada:</strong> R² de 0.254 evidencia que 75% da variância permanece não explicada por features acústicas, reforçando necessidade de modelos multifatoriais</li>
+                        <li><strong>Ausência de Validação Temporal:</strong> Não foi realizada validação em janela temporal futura (walk-forward validation)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-check-circle"></i> Conclusões e Contribuições</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>✅ Técnico-Científico</h4>
+                        <p style="font-size: 0.8em;">Sistema completo implementado seguindo padrões de engenharia de software e boas práticas em MLOps</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>✅ Metodológico</h4>
+                        <p style="font-size: 0.8em;">Aplicação rigorosa da metodologia CRISP-DM com validação estatística apropriada</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>✅ Prático-Aplicado</h4>
+                        <p style="font-size: 0.8em;">Insights acionáveis derivados de análise empírica para stakeholders da indústria musical</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>✅ Acadêmico</h4>
+                        <p style="font-size: 0.8em;">Pesquisa documentada, reprodutível e com código aberto para validação pela comunidade científica</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p style="text-align: center; font-size: 1.1em;">
+                        <strong>Conclusão Principal:</strong> Técnicas de Machine Learning podem auxiliar na compreensão de padrões de popularidade musical baseados em características acústicas, mas devem ser complementadas com análise de fatores contextuais e socioculturais para aplicações práticas efetivas
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2><i class="fas fa-book-open"></i> Referências</h2>
+                <div style="font-size: 0.75em; text-align: left;">
+                    <ol>
+                        <li>GERON, A. <em>Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow</em>. 3rd ed. O'Reilly Media, 2022.</li>
+                        <li>CHEN, T.; GUESTRIN, C. <em>XGBoost: A Scalable Tree Boosting System</em>. Proceedings of the 22nd ACM SIGKDD, 2016.</li>
+                        <li>SPOTIFY. <em>Web API Documentation</em>. Disponível em: https://developer.spotify.com/documentation/web-api/</li>
+                        <li>PEDREGOSA, F. et al. <em>Scikit-learn: Machine Learning in Python</em>. Journal of Machine Learning Research, v. 12, p. 2825-2830, 2011.</li>
+                        <li>LESKOVEC, J.; RAJARAMAN, A.; ULLMAN, J. <em>Mining of Massive Datasets</em>. 3rd ed. Cambridge University Press, 2020.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="center-content" data-background-gradient="linear-gradient(135deg, #1DB954, #191414)">
+                <h2><i class="fas fa-envelope"></i> Contato</h2>
+                <div style="margin: 40px 0;">
+                    <p style="font-size: 1.2em;"><strong>Geyson de Araujo</strong></p>
+                    <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/tavs-coelho" style="color: var(--spotify-green);">@tavs-coelho</a></p>
+                    <p><i class="fas fa-link"></i> Repositório: <a href="https://github.com/tavs-coelho/An-lise-Spotify" style="color: var(--spotify-green);">An-lise-Spotify</a></p>
+                </div>
+                <div style="margin-top: 50px;">
+                    <h3>🔗 Links Úteis</h3>
+                    <div style="margin-top: 20px;">
+                        <span class="spotify-badge"><i class="fas fa-book"></i> README</span>
+                        <span class="spotify-badge"><i class="fas fa-rocket"></i> Quick Start</span>
+                        <span class="spotify-badge"><i class="fas fa-file-alt"></i> Documentação</span>
+                    </div>
+                </div>
+                <div style="margin-top: 50px; font-size: 2em;">
+                    <p><strong>⭐ Deixe uma estrela no GitHub!</strong></p>
+                </div>
+            </section>
+
+            <section class="center-content">
+                <h1><i class="fas fa-heart"></i> Agradecimentos</h1>
+                <h3>Perguntas e Discussão</h3>
+                <div style="margin-top: 50px; font-size: 1.5em;">
+                    <p><i class="fas fa-music"></i> <i class="fas fa-code"></i> <i class="fas fa-brain"></i></p>
+                </div>
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 0.8em; color: #999;">
+                        Desenvolvido com rigor científico e paixão por Music Information Retrieval<br>
+                        Programa de Mestrado em Ciência de Dados | Dezembro de 2025
+                    </p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/zoom/zoom.js"></script>
+
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            // --- AJUSTE PARA NOTEBOOK (16:9) ---
+            width: 1280,
+            height: 720,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0,
+            // -----------------------------------
+
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            
+            // Display controls
+            controls: true,
+            progress: true,
+            center: false,
+            slideNumber: 'c/t',
+            
+            // Plugins
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ],
+            
+            // Keyboard shortcuts
+            keyboard: {
+                39: 'next',
+                37: 'prev',
+                70: function() {
+                    // F key for fullscreen
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    } else {
+                        document.documentElement.requestFullscreen();
+                    }
+                }
+            }
+        });
+
+        // Auto-fullscreen hint (opcional)
+        setTimeout(() => {
+            if (!document.fullscreenElement) {
+                console.log('💡 Dica: Pressione F para tela cheia!');
+            }
+        }, 2000);
+    </script>
+
+    <div class="footer">
+        Navegação: ← → | Tela cheia: F | Zoom: Alt+Click | Visão geral: ESC
+    </div>
+</body>
+</html>
+
