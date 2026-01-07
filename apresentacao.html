@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise Preditiva de Popularidade Musical no Spotify - Apresentação Acadêmica</title>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css" id="theme">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/monokai.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
+<style>
         :root {
             --spotify-green: #1DB954;
             --spotify-black: #191414;
@@ -21,6 +8,7 @@
 
         .reveal {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 24px; /* Fonte base ajustada para notebook */
         }
 
         .reveal h1, .reveal h2, .reveal h3 {
@@ -28,42 +16,36 @@
             text-transform: none;
         }
 
-        .reveal h1 {
-            font-size: 2.2em; /* Reduzido levemente para evitar quebra */
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+        .reveal h1 { font-size: 2.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .reveal h2 { font-size: 1.5em; }
 
-        .reveal .slides section {
-            text-align: left;
-            height: 100%; /* Garante uso da altura total */
-        }
-
-        .reveal .center-content {
-            text-align: center;
-        }
-
-        /* --- CORREÇÃO DE IMAGENS (NOVO) --- */
-        /* Regra geral: nenhuma imagem pode passar de 55% da altura da tela */
+        /* --- CORREÇÃO DAS IMAGENS (SIMPLIFICADO) --- */
+        /* Força a imagem a nunca passar de 450px de altura (o slide tem 720px) */
         .reveal section img {
-            max-height: 55vh !important; 
-            max-width: 100%;
+            max-height: 400px !important; 
+            max-width: 90% !important;
+            height: auto !important;
             width: auto;
-            object-fit: contain;
             display: block;
             margin: 10px auto;
+            border: none;
+            box-shadow: none;
+            object-fit: contain; /* Garante que a imagem apareça inteira */
         }
 
-        /* Exceção para a grid de screenshots (imagens menores) */
+        /* Imagens da galeria (grid) precisam ser menores */
         .reveal .screenshot-grid img {
-            max-height: 15vh !important;
-            border: 1px solid var(--spotify-green);
+            max-height: 120px !important;
+            border: 1px solid var(--spotify-green) !important;
         }
-        /* ---------------------------------- */
+        /* ------------------------------------------- */
+
+        .reveal .center-content { text-align: center; }
 
         .reveal .spotify-badge {
             background: linear-gradient(135deg, var(--spotify-green), #1ed760);
             color: white;
-            padding: 8px 15px;
+            padding: 5px 15px;
             border-radius: 20px;
             display: inline-block;
             margin: 5px;
@@ -73,9 +55,9 @@
 
         .reveal .tech-stack {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .reveal .tech-item {
@@ -84,19 +66,9 @@
             border-radius: 10px;
             padding: 10px;
             text-align: center;
-            transition: all 0.3s ease;
         }
 
-        .reveal .tech-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(29, 185, 84, 0.3);
-        }
-
-        .reveal .tech-item i {
-            font-size: 1.8em;
-            color: var(--spotify-green);
-            margin-bottom: 5px;
-        }
+        .reveal .tech-item i { font-size: 1.8em; color: var(--spotify-green); margin-bottom: 5px; }
 
         .reveal .metrics-grid {
             display: grid;
@@ -112,37 +84,14 @@
             border-radius: 8px;
         }
 
-        .reveal .metric-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: var(--spotify-green);
-        }
+        .reveal .metric-value { font-size: 1.8em; font-weight: bold; color: var(--spotify-green); }
+        .reveal .metric-label { font-size: 0.7em; color: #999; }
 
-        .reveal .metric-label {
-            font-size: 0.8em;
-            color: #999;
-            margin-top: 5px;
-        }
-
-        .reveal .feature-list {
-            list-style: none;
-            padding: 0;
-            font-size: 0.8em;
-        }
-
-        .reveal .feature-list li {
-            padding: 5px 0;
-            padding-left: 35px;
-            position: relative;
-        }
-
+        .reveal .feature-list { list-style: none; padding: 0; font-size: 0.8em; }
+        .reveal .feature-list li { padding: 5px 0 5px 30px; position: relative; }
         .reveal .feature-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--spotify-green);
-            font-weight: bold;
-            font-size: 1.5em;
+            content: "✓"; position: absolute; left: 0; 
+            color: var(--spotify-green); font-weight: bold; font-size: 1.2em;
         }
 
         .reveal .highlight-box {
@@ -151,675 +100,32 @@
             border-radius: 10px;
             padding: 15px;
             margin: 15px 0;
+            font-size: 0.8em;
         }
 
         .reveal .code-block {
             background: #1e1e1e;
             border-radius: 8px;
             padding: 15px;
-            margin: 15px 0;
+            margin: 10px 0;
             font-family: 'Courier New', monospace;
-            font-size: 0.7em;
-        }
-
-        .reveal .author-info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            font-size: 0.6em;
+            text-align: left;
         }
 
         .reveal .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 0.7em;
+            width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.65em;
         }
+        .reveal .comparison-table th { background: var(--spotify-green); color: white; padding: 8px; }
+        .reveal .comparison-table td { padding: 8px; border-bottom: 1px solid #333; }
 
-        .reveal .comparison-table th {
-            background: var(--spotify-green);
-            color: white;
-            padding: 10px;
-            font-weight: bold;
+        .reveal .screenshot-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px;
         }
-
-        .reveal .comparison-table td {
-            padding: 8px;
-            border-bottom: 1px solid #333;
-        }
-
-        .reveal .comparison-table tr:hover {
-            background: rgba(29, 185, 84, 0.1);
-        }
-
-        /* Classe específica atualizada para não cortar */
-        .reveal .architecture-diagram {
-            max-height: 55vh; /* Limite de altura */
-            width: auto;      /* Largura automática */
-            margin: 10px auto;
-            display: block;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-        }
+        .reveal .screenshot-item img { width: 100%; border-radius: 5px; }
+        .reveal .screenshot-caption { font-size: 0.5em; color: #999; text-align: center; }
 
         .reveal .footer {
-            position: fixed;
-            bottom: 5px;
-            left: 10px;
-            font-size: 0.5em;
-            color: #666;
-            z-index: 10;
-        }
-
-        /* Grid de screenshots */
-        .reveal .screenshot-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .reveal .screenshot-item img {
-            width: 100%;
-            border-radius: 8px;
-            border: 2px solid var(--spotify-green);
-            transition: transform 0.3s ease;
-        }
-
-        .reveal .screenshot-caption {
-            font-size: 0.6em;
-            color: #999;
-            margin-top: 5px;
-            text-align: center;
+            position: fixed; bottom: 5px; left: 10px; font-size: 0.5em; color: #666; z-index: 10;
         }
     </style>
-</head>
-<body>
-    <div class="reveal">
-        <div class="slides">
-            
-            <section class="center-content" data-background-gradient="linear-gradient(135deg, #191414, #1DB954)">
-                <h1><i class="fas fa-music"></i> Modelagem Preditiva de Popularidade Musical</h1>
-                <h3>Uma Abordagem Baseada em Machine Learning para Análise de Características Acústicas no Spotify</h3>
-                <div class="author-info" style="margin-top: 40px;">
-                    <div>
-                        <p><strong>Mestrando:</strong> Geyson de Araujo</p>
-                        <p><strong>Programa:</strong> Mestrado em Ciência de Dados</p>
-                        <p><strong>Apresentação:</strong> Dezembro de 2025</p>
-                    </div>
-                </div>
-                <div style="margin-top: 30px;">
-                    <span class="badge-success"><i class="fab fa-github"></i> Repositório Open Source</span>
-                    <span class="badge-info"><i class="fas fa-code"></i> Python 3.8+</span>
-                    <span class="badge-warning"><i class="fas fa-brain"></i> Machine Learning</span>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-list"></i> Estrutura da Apresentação</h2>
-                <ul class="feature-list">
-                    <li>Introdução: Contexto e Motivação da Pesquisa</li>
-                    <li>Fundamentação Teórica: Metodologia CRISP-DM</li>
-                    <li>Materiais e Métodos: Dataset e Arquitetura</li>
-                    <li><strong>Análise Exploratória de Dados: Visualizações e Estatísticas Descritivas</strong></li>
-                    <li>Análise de Correlações e Distribuições Estatísticas</li>
-                    <li>Modelagem Preditiva: Algoritmos de Machine Learning</li>
-                    <li>Resultados: Métricas de Desempenho e Feature Importance</li>
-                    <li>Discussão: Insights e Implicações Práticas</li>
-                    <li>Implementação: Sistema de Produção (API REST e Dashboard Interativo)</li>
-                    <li>Conclusões, Limitações e Trabalhos Futuros</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-question"></i> Motivação e Relevância</h2>
-                <div class="tech-stack">
-                    <div class="tech-item">
-                        <i class="fas fa-chart-line"></i>
-                        <h4>Relevância Econômica</h4>
-                        <p style="font-size: 0.7em;">Indústria bilionária; fatores de popularidade são estratégicos</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-brain"></i>
-                        <h4>Desafio Científico</h4>
-                        <p style="font-size: 0.7em;">Regressão multidimensional com features não-lineares</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h4>Contribuição Acadêmica</h4>
-                        <p style="font-size: 0.7em;">Metodologia CRISP-DM com validação estatística</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-rocket"></i>
-                        <h4>Aplicabilidade Prática</h4>
-                        <p style="font-size: 0.7em;">Sistema pronto para produção</p>
-                    </div>
-                </div>
-                <div class="highlight-box">
-                    <p style="text-align: center; font-size: 0.9em;">
-                        <strong>Objetivo:</strong> Desenvolver modelo preditivo relacionando características acústicas e popularidade (Music Information Retrieval).
-                    </p>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-question-circle"></i> Problema de Pesquisa</h2>
-                <div class="highlight-box">
-                    <p style="font-size: 1.1em; text-align: center;">
-                        <strong>"Quais características acústicas objetivas apresentam maior poder preditivo sobre a popularidade no Spotify?"</strong>
-                    </p>
-                </div>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">113.999</div>
-                        <div class="metric-label">Músicas Analisadas</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">23</div>
-                        <div class="metric-label">Atributos Totais</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">9</div>
-                        <div class="metric-label">Features Acústicas</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">0-100</div>
-                        <div class="metric-label">Escala de Popularidade</div>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-users"></i> Stakeholders</h2>
-                <div class="tech-stack">
-                    <div class="tech-item">
-                        <i class="fas fa-microphone"></i>
-                        <h4>Artistas</h4>
-                        <p style="font-size: 0.7em;">Decisões criativas</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-compact-disc"></i>
-                        <h4>Gravadoras</h4>
-                        <p style="font-size: 0.7em;">Investimento em catálogo</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-stream"></i>
-                        <h4>Streaming</h4>
-                        <p style="font-size: 0.7em;">Curadoria algorítmica</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-bullhorn"></i>
-                        <h4>Marketing</h4>
-                        <p style="font-size: 0.7em;">Estratégias data-driven</p>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-project-diagram"></i> Metodologia: CRISP-DM</h2>
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <div style="flex: 1;">
-                        <img src="./assets/screenshots/branding/crisp_dm_diagram.png" alt="Diagrama CRISP-DM" style="max-width: 100%; border-radius: 10px;">
-                    </div>
-                    <div style="flex: 1;">
-                        <ul class="feature-list" style="font-size: 0.7em;">
-                            <li><strong>Business Understanding:</strong> Definição do problema e KPIs</li>
-                            <li><strong>Data Understanding:</strong> Análise Exploratória (EDA)</li>
-                            <li><strong>Data Preparation:</strong> Limpeza e normalização</li>
-                            <li><strong>Modeling:</strong> Treinamento de 6 algoritmos</li>
-                            <li><strong>Evaluation:</strong> Validação cruzada (MAE, RMSE, R²)</li>
-                            <li><strong>Deployment:</strong> API REST e Dashboard</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-database"></i> O Dataset</h2>
-                <div class="highlight-box">
-                    <h4 style="text-align: center; color: var(--spotify-green); margin: 0;">Spotify Songs: 113.999 Instâncias</h4>
-                </div>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">23</div>
-                        <div class="metric-label">Atributos Totais</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">9</div>
-                        <div class="metric-label">Features Acústicas</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">100%</div>
-                        <div class="metric-label">Completude</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">0-100</div>
-                        <div class="metric-label">Target</div>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-sitemap"></i> Arquitetura do Sistema</h2>
-                <img src="./assets/screenshots/architecture.png" alt="Arquitetura" class="architecture-diagram">
-                <div style="text-align: center; margin-top: 10px;">
-                    <span class="spotify-badge">FastAPI REST API</span>
-                    <span class="spotify-badge">Streamlit Dashboard</span>
-                    <span class="spotify-badge">Python Library</span>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-tools"></i> Stack Tecnológico</h2>
-                <div class="tech-stack">
-                    <div class="tech-item"><i class="fab fa-python"></i><h4>Python</h4></div>
-                    <div class="tech-item"><i class="fas fa-brain"></i><h4>sklearn</h4></div>
-                    <div class="tech-item"><i class="fas fa-rocket"></i><h4>XGBoost</h4></div>
-                    <div class="tech-item"><i class="fas fa-server"></i><h4>FastAPI</h4></div>
-                    <div class="tech-item"><i class="fas fa-chart-line"></i><h4>Streamlit</h4></div>
-                    <div class="tech-item"><i class="fab fa-docker"></i><h4>Docker</h4></div>
-                    <div class="tech-item"><i class="fas fa-code-branch"></i><h4>Actions</h4></div>
-                    <div class="tech-item"><i class="fas fa-vial"></i><h4>Pytest</h4></div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-stream"></i> Pipeline de Processamento</h2>
-                <div class="code-block" style="font-size: 0.6em;">
-📊 Dados Brutos → 🔍 EDA (Distribuições/Correlações)
-      ↓
-🧹 Preparação (Missing Values, Normalização, Feature Engineering)
-      ↓
-🤖 Modelagem (Train/Test Split 80/20, 6 Modelos, Tuning)
-      ↓
-📈 Avaliação (MAE, RMSE, R², Cross-Validation)
-      ↓
-🚀 Deployment (API REST, Dashboard, Docker)
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-music"></i> Features Acústicas</h2>
-                <table class="comparison-table">
-                    <thead>
-                        <tr><th>Feature</th><th>Definição</th><th>Escala</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Danceability</strong></td><td>Adequação para dança (ritmo, batida)</td><td>0.0 - 1.0</td></tr>
-                        <tr><td><strong>Energy</strong></td><td>Intensidade e atividade percebida</td><td>0.0 - 1.0</td></tr>
-                        <tr><td><strong>Loudness</strong></td><td>Volume médio (dB)</td><td>-60 a 0 dB</td></tr>
-                        <tr><td><strong>Valence</strong></td><td>Positividade musical (triste a alegre)</td><td>0.0 - 1.0</td></tr>
-                        <tr><td><strong>Acousticness</strong></td><td>Probabilidade de ser acústico</td><td>0.0 - 1.0</td></tr>
-                        <tr><td><strong>Tempo</strong></td><td>Batidas por minuto (BPM)</td><td>0 - 250+</td></tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-chart-area"></i> EDA: Distribuição Target</h2>
-                <img src="./assets/screenshots/analysis/popularity_histogram.png" alt="Histograma Popularidade" class="architecture-diagram">
-                <div class="highlight-box" style="margin-top: 10px; padding: 10px;">
-                    <ul style="font-size: 0.8em;">
-                        <li>Média ≈ 38 pontos (concentração em baixa/média popularidade)</li>
-                        <li>Distribuição positivamente assimétrica (cauda longa à direita)</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-chart-pie"></i> Categorias de Popularidade</h2>
-                <img src="./assets/screenshots/analysis/popularity_categories.png" alt="Categorias" class="architecture-diagram" style="max-height: 45vh !important;">
-                <div class="metrics-grid" style="margin-top: 10px;">
-                    <div class="metric-card"><div class="metric-value">Low</div><div class="metric-label">0-33</div></div>
-                    <div class="metric-card"><div class="metric-value">Medium</div><div class="metric-label">34-66</div></div>
-                    <div class="metric-card"><div class="metric-value">High</div><div class="metric-label">67-100</div></div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-th"></i> Matriz de Correlação</h2>
-                <img src="./assets/screenshots/analysis/correlation_heatmap.png" alt="Matriz Correlação" class="architecture-diagram">
-                <div class="highlight-box">
-                    <p style="font-size: 0.7em; text-align: center;">
-                        Loudness e Energy correlacionados positivamente com popularidade. Acousticness negativamente.
-                    </p>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-signal"></i> Correlação: Features vs. Target</h2>
-                <img src="./assets/screenshots/analysis/feature_correlations.png" alt="Correlações Barras" class="architecture-diagram">
-                <div style="margin-top: 10px;">
-                    <ul class="feature-list" style="font-size: 0.7em;">
-                        <li><strong>Positivas:</strong> Loudness (r=+0.49), Energy (r=+0.22)</li>
-                        <li><strong>Negativas:</strong> Acousticness (r=-0.07)</li>
-                        <li><strong>Neutras:</strong> Tempo, Liveness (~0)</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-box"></i> Distribuição das Features</h2>
-                <img src="./assets/screenshots/analysis/features_boxplot.png" alt="Boxplots" class="architecture-diagram">
-            </section>
-
-            <section>
-                <h2><i class="fas fa-music"></i> Danceability vs Popularidade</h2>
-                <img src="./assets/screenshots/analysis/danceability_popularity_scatter.png" alt="Scatter" class="architecture-diagram">
-                <div class="metrics-grid">
-                    <div class="metric-card"><div class="metric-value">+0.13</div><div class="metric-label">Correlação</div></div>
-                    <div class="metric-card"><div class="metric-value">15.6%</div><div class="metric-label">Importância</div></div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-bolt"></i> Energy vs Popularidade</h2>
-                <img src="./assets/screenshots/analysis/energy_popularity_scatter.png" alt="Scatter" class="architecture-diagram">
-                <div class="metrics-grid">
-                    <div class="metric-card"><div class="metric-value">+0.22</div><div class="metric-label">Correlação</div></div>
-                    <div class="metric-card"><div class="metric-value">19.8%</div><div class="metric-label">Importância</div></div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-volume-up"></i> Loudness vs Popularidade</h2>
-                <img src="./assets/screenshots/analysis/loudness_popularity_scatter.png" alt="Scatter" class="architecture-diagram">
-                <div class="metrics-grid">
-                    <div class="metric-card"><div class="metric-value">+0.49</div><div class="metric-label">Correlação Forte</div></div>
-                    <div class="metric-card"><div class="metric-value">28.5%</div><div class="metric-label">Top Feature!</div></div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-images"></i> Galeria de Análises</h2>
-                <div class="screenshot-grid">
-                    <div class="screenshot-item"><img src="./assets/screenshots/analysis/correlation_heatmap.png"></div>
-                    <div class="screenshot-item"><img src="./assets/screenshots/analysis/popularity_histogram.png"></div>
-                    <div class="screenshot-item"><img src="./assets/screenshots/analysis/feature_correlations.png"></div>
-                    <div class="screenshot-item"><img src="./assets/screenshots/analysis/loudness_popularity_scatter.png"></div>
-                    <div class="screenshot-item"><img src="./assets/screenshots/analysis/xgb_feature_importance.png"></div>
-                    <div class="screenshot-item"><img src="./assets/screenshots/analysis/model_comparison.png"></div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-robot"></i> Comparação de Modelos</h2>
-                <table class="comparison-table">
-                    <thead><tr><th>Algoritmo</th><th>R²</th><th>MAE</th><th>RMSE</th></tr></thead>
-                    <tbody>
-                        <tr style="background: rgba(29, 185, 84, 0.2);">
-                            <td><strong>🏆 XGBoost</strong></td><td><strong>0.254</strong></td><td><strong>12.48</strong></td><td><strong>16.92</strong></td>
-                        </tr>
-                        <tr><td>Gradient Boosting</td><td>0.241</td><td>12.73</td><td>17.15</td></tr>
-                        <tr><td>Random Forest</td><td>0.228</td><td>13.02</td><td>17.48</td></tr>
-                        <tr><td>ElasticNet</td><td>0.185</td><td>14.21</td><td>18.92</td></tr>
-                        <tr><td>Ridge</td><td>0.182</td><td>14.35</td><td>19.01</td></tr>
-                    </tbody>
-                </table>
-                <div style="text-align: center; margin-top: 15px;">
-                    <span class="badge-success">Ensembles (Árvores) > Modelos Lineares</span>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-chart-bar"></i> Feature Importance (XGBoost)</h2>
-                <img src="./assets/screenshots/analysis/xgb_feature_importance.png" alt="Importância" class="architecture-diagram">
-                <div class="highlight-box">
-                    <ol style="font-size: 0.8em;">
-                        <li><strong>Loudness (28.5%)</strong> - Preditor dominante</li>
-                        <li><strong>Energy (19.8%)</strong> - Intensidade percebida</li>
-                        <li><strong>Danceability (15.6%)</strong> - Adequação para dança</li>
-                    </ol>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-balance-scale"></i> Comparação Visual</h2>
-                <img src="./assets/screenshots/analysis/model_comparison.png" alt="Comparação" class="architecture-diagram">
-                <div class="highlight-box">
-                    <p style="font-size: 0.8em; text-align: center;">
-                        <strong>XGBoost:</strong> Menor erro (MAE = 12.48) e maior R² (0.254)
-                    </p>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-trophy"></i> Principais Resultados</h2>
-                <img src="./assets/screenshots/results_summary.png" alt="Resultados" class="architecture-diagram" style="max-height: 50vh !important;">
-                <div class="metrics-grid">
-                    <div class="metric-card"><div class="metric-value">25%</div><div class="metric-label">R² (Variância)</div></div>
-                    <div class="metric-card"><div class="metric-value">±12.5</div><div class="metric-label">Erro Médio</div></div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-lightbulb"></i> Discussão e Achados</h2>
-                <ul class="feature-list" style="font-size: 0.8em;">
-                    <li><strong>Poder Preditivo Moderado:</strong> R²=0.254 indica influência de fatores externos.</li>
-                    <li><strong>Dominância de Intensidade:</strong> Loudness e Energy são cruciais.</li>
-                    <li><strong>Não-Linearidade:</strong> Modelos complexos superam lineares.</li>
-                    <li><strong>Fatores Ocultos:</strong> Marketing, artista e contexto explicam os outros 75%.</li>
-                </ul>
-                <div class="highlight-box" style="margin-top: 20px;">
-                    <p style="text-align: center; font-size: 0.8em;">
-                        <strong>Conclusão:</strong> Features acústicas são úteis, mas insuficientes sozinhas.
-                    </p>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-server"></i> FastAPI REST API</h2>
-                <img src="./assets/screenshots/api_preview.png" alt="API" class="architecture-diagram">
-                <div class="code-block">
-POST /predict
-{ "danceability": 0.735, "energy": 0.578, "loudness": -5.594 ... }
-→ {"predicted_popularity": 65.32, "category": "Medium"}
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-chart-line"></i> Streamlit Dashboard</h2>
-                <img src="./assets/screenshots/dashboard_preview.png" alt="Dashboard" class="architecture-diagram">
-                <ul class="feature-list" style="margin-top: 15px;">
-                    <li>Visualizações interativas Plotly</li>
-                    <li>Comparação de modelos em tempo real</li>
-                    <li>Simulação de predição</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2><i class="fab fa-python"></i> Uso como Biblioteca</h2>
-                <div class="code-block" style="font-size: 0.6em;">
-# Instalação: pip install -e .
-from spotify_analysis.models import ModelTrainer
-from spotify_analysis.data import DataLoader
-
-loader = DataLoader()
-df = loader.load_data()
-trainer = ModelTrainer('xgboost')
-trainer.fit(X_train, y_train)
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fab fa-docker"></i> Docker Deployment</h2>
-                <div class="code-block">
-docker-compose up -d
-# API: localhost:8000/docs
-# Dashboard: localhost:8501
-                </div>
-                <div class="tech-stack" style="margin-top: 20px;">
-                    <div class="tech-item"><i class="fas fa-box"></i><h4>Container</h4></div>
-                    <div class="tech-item"><i class="fas fa-sync-alt"></i><h4>Reprodutível</h4></div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-code-branch"></i> CI/CD GitHub Actions</h2>
-                <ul class="feature-list">
-                    <li><strong>Testes:</strong> pytest com cobertura</li>
-                    <li><strong>Qualidade:</strong> black, flake8, mypy</li>
-                    <li><strong>Segurança:</strong> bandit, CodeQL</li>
-                    <li><strong>Multi-Python:</strong> 3.8 a 3.12</li>
-                </ul>
-                <div style="text-align: center; margin-top: 20px;">
-                    <span class="badge-success">100% Passing</span> <span class="badge-info">Secure</span>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-vial"></i> Testes e Qualidade</h2>
-                <div class="metrics-grid">
-                    <div class="metric-card"><div class="metric-value">pytest</div><div class="metric-label">Framework</div></div>
-                    <div class="metric-card"><div class="metric-value">80%+</div><div class="metric-label">Cobertura</div></div>
-                    <div class="metric-card"><div class="metric-value">PEP 8</div><div class="metric-label">Estilo</div></div>
-                </div>
-                <div class="code-block" style="margin-top: 20px;">
-make test
-make test-cov
-make quality
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-folder-tree"></i> Estrutura do Projeto</h2>
-                <div class="code-block" style="font-size: 0.5em;">
-An-lise-Spotify/
-├── src/spotify_analysis/      # Core
-│   ├── data/ models/ visualization/ utils/
-├── tests/                     # Unit tests
-├── notebooks/                 # Jupyter
-├── docs/                      # Documentation
-├── api.py                     # FastAPI
-├── app.py                     # Streamlit
-├── Dockerfile & docker-compose.yml
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-book"></i> Documentação</h2>
-                <ul class="feature-list">
-                    <li><strong>README.md:</strong> Guia completo</li>
-                    <li><strong>QUICKSTART.md:</strong> Instalação rápida</li>
-                    <li><strong>CONTRIBUTING.md:</strong> Guia Dev</li>
-                    <li><strong>API Docs:</strong> Swagger UI</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-award"></i> Competências</h2>
-                <div class="tech-stack">
-                    <div class="tech-item"><h4>EDA</h4></div>
-                    <div class="tech-item"><h4>ML Supervisionado</h4></div>
-                    <div class="tech-item"><h4>APIs REST</h4></div>
-                    <div class="tech-item"><h4>Dashboards</h4></div>
-                    <div class="tech-item"><h4>DevOps/Docker</h4></div>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-road"></i> Trabalhos Futuros</h2>
-                <ul class="feature-list">
-                    <li><strong>Séries Temporais:</strong> Evolução da popularidade</li>
-                    <li><strong>Variáveis Contextuais:</strong> Dados sociais/artistas</li>
-                    <li><strong>NLP:</strong> Análise de letras</li>
-                    <li><strong>Deep Learning:</strong> Áudio raw (spectrogramas)</li>
-                    <li><strong>Cloud:</strong> Deploy escalável (AWS/GCP)</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-exclamation-triangle"></i> Limitações</h2>
-                <div class="highlight-box">
-                    <ul style="font-size: 0.8em;">
-                        <li>Fatores externos não capturados (marketing, viral)</li>
-                        <li>Viés de seleção temporal (snapshot)</li>
-                        <li>Viés de plataforma (apenas Spotify)</li>
-                        <li>Correlação ≠ Causalidade</li>
-                        <li>75% da variância não explicada</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-check-circle"></i> Conclusão Final</h2>
-                <div class="metrics-grid">
-                    <div class="metric-card"><h4>✅ Técnico</h4><p style="font-size:0.6em">Software robusto e reprodutível</p></div>
-                    <div class="metric-card"><h4>✅ Científico</h4><p style="font-size:0.6em">Rigor metodológico (CRISP-DM)</p></div>
-                    <div class="metric-card"><h4>✅ Prático</h4><p style="font-size:0.6em">Insights para indústria</p></div>
-                </div>
-                <div class="highlight-box" style="margin-top: 20px;">
-                    <p style="text-align: center; font-size: 0.9em;">
-                        ML ajuda a entender a música, mas o fator humano/social ainda é dominante.
-                    </p>
-                </div>
-            </section>
-
-            <section>
-                <h2><i class="fas fa-book-open"></i> Referências</h2>
-                <div style="font-size: 0.6em;">
-                    <ol>
-                        <li>GERON, A. <em>Hands-On Machine Learning</em>. O'Reilly, 2022.</li>
-                        <li>CHEN, T. <em>XGBoost</em>. KDD, 2016.</li>
-                        <li>SPOTIFY. <em>Web API Documentation</em>.</li>
-                        <li>PEDREGOSA, F. <em>Scikit-learn</em>. JMLR, 2011.</li>
-                    </ol>
-                </div>
-            </section>
-
-            <section class="center-content" data-background-gradient="linear-gradient(135deg, #1DB954, #191414)">
-                <h2><i class="fas fa-envelope"></i> Contato</h2>
-                <div style="margin: 30px 0;">
-                    <p style="font-size: 1.2em;"><strong>Geyson de Araujo</strong></p>
-                    <p><i class="fab fa-github"></i> <a href="https://github.com/leone-leo" style="color:white;">@leone-leo</a></p>
-                </div>
-                <div>
-                    <span class="spotify-badge">README</span>
-                    <span class="spotify-badge">Documentação</span>
-                </div>
-                <div style="margin-top: 40px;">
-                    <p><strong>⭐ Deixe uma estrela no GitHub!</strong></p>
-                </div>
-            </section>
-
-            <section class="center-content">
-                <h1><i class="fas fa-heart"></i> Obrigado!</h1>
-                <h3>Perguntas?</h3>
-                <div style="margin-top: 30px;">
-                    <p style="font-size: 0.8em; color: #999;">Mestrado em Ciência de Dados | Dez 2025</p>
-                </div>
-            </section>
-
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/notes/notes.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/markdown/markdown.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/zoom/zoom.js"></script>
-
-    <script>
-        Reveal.initialize({
-            // CONFIGURAÇÃO WIDESCREEN PARA NOTEBOOK
-            width: 1280,
-            height: 720,
-            margin: 0.04,
-            minScale: 0.2,
-            maxScale: 2.0,
-            
-            // Centraliza verticalmente para evitar cortes se sobrar espaço
-            center: true, 
-            
-            hash: true,
-            transition: 'slide',
-            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
-        });
-    </script>
-
-    <div class="footer">
-        Navegação: ← → | Tela cheia: F
-    </div>
-</body>
-</html>
